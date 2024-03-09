@@ -1,0 +1,102 @@
+<!-- MODAL CARRERA-->
+<form #formCarrera="ngForm" (submit) ="gestion()" style="text-align: center;">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 150%;right: 20%">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ t }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-left: 20px">
+                  <label for="">Ingrese el nombre de la carrera:</label>
+                  <input type="text" class="form-control" style="text-align: center" #nombre_carrera="ngModel" name="nombre_carrera" [(ngModel)]="carrera.nombre_carrera" required>
+                  <small class="form-text text-muted" *ngIf="nombre_carrera.touched && !nombre_carrera.valid">Campo requerido</small>
+                </div>
+            </div>
+        
+          <div class="modal-footer" style="justify-content: center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #000; color: #fff; font-weight: bold; font-size: 15px">Cerrar</button>
+            <button type="button" (click)="gestion()" class="btn" style="background-color: #1E90FF; color: #fff; font-weight: bold; font-size: 15px" [disabled]="!formCarrera.form.valid">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+<!--FIN MODAL CARRERA--> 
+
+<br>
+
+<!--NAVBAR-->
+<div class="nav-menu fixed-top">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <nav class="navbar" style="margin-bottom:-8%">
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-educacion.jpg" style="width:20%;  margin-left: 118%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-itsal.png" style="width:20%; margin-left: 72%; margin-top: 1%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo_tecnm_2019.jpg" style="width:10%; margin-top: -9%; margin-left: 100%" class="img-fluid" alt="logo"></a> 
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                  <div class="navigation">
+                    <input type="checkbox" name="">
+                    <span></span>
+                    <span></span>
+                    <ul class="menu">
+                        <li><a href="alumno">Alumnos</a>
+                        <li><a href="asesorgeneral">Asesores</a>
+                        <li><a href="periodo">Periodos</a>
+                        <li><a href="residencia">Residencias</a>
+                        <li><a href="dependencia">Dependencias</a>
+                        <li><a href="#home">Salir</a>
+                    </ul>
+                </div>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!--FIN NAVBAR-->
+
+
+
+
+<br><br><br>  
+<h2 *ngIf="carreras.length == 0">Sin resultados</h2>
+<div *ngIf="carreras.length > 0">
+    <h3 style="text-align: center; color: black">Lista de Carreras</h3>
+
+<button type="submit" class="btn btn-light" *ngIf="s.tipo == 1" data-toggle="modal" data-target="#exampleModal" (click)="setG(0)" style="margin-left: 43.5%; color: black">
+  NUEVA CARRERA
+</button>
+<br>
+  <br />
+  <table class="table table-striped" style="text-align: center">
+    <tr>
+      <th (click) = "sortTable('numero')" >#</th>
+      <th (click) = "sortTable('id')" >ID</th>
+      <th (click) = "sortTable('carrera')" >Carrera</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let car of carreras; let i=index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ car.idCarrera }}</td>
+      <td>{{ car.nombre_carrera }}</td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Opciones
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" (click)="setG(1,car)">Editar</a>
+            <a class="dropdown-item" [routerLink]="['/carrera']" (click)="eliminar(car.idCarrera)">Eliminar</a>
+          </div>
+        </div>
+        <div>
+          <!--<ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [(page)]="page"
+              (pageChange)="loadPage($event)"></ngb-pagination>-->
+      </div>
+      </td>
+    </tr>
+  </table>

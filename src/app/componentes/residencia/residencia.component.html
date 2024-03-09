@@ -1,0 +1,159 @@
+<!-- MODAL RESIDENCIA-->
+<form #formResidencia="ngForm" (submit) ="gestion()" style="text-align: center;">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 150%;right: 20%">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ t }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body">
+            
+              <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Titulo del Proyecto:</label>
+                        <input type="text" class="form-control" style="text-align: center" #titulo="ngModel" name="titulo" [(ngModel)]="residencia.titulo" required>
+                        <small class="form-text text-muted" *ngIf="titulo.touched && !titulo.valid">Campo requerido</small>
+                    </div>       
+                </div>
+              </div>
+
+              <div class="row" style="justify-content: center">
+                    <div class="form-group" style="margin-left: 20px">
+                        <label for="">Fecha de Entrega:</label>
+                        <input type="date" class="form-control" style="text-align: center" #fecha_de_entrega="ngModel" name="fecha_de_entrega" [(ngModel)]="residencia.fecha_de_entrega" required>
+                        <small class="form-text text-muted" *ngIf="fecha_de_entrega.touched && !fecha_de_entrega.valid">Campo requerido</small>
+                      </div>
+                      
+                    <div class="form-group" style="margin-left: 20px">
+                        <label for="">Numero de Residentes:</label>
+                        <input type="text" class="form-control" style="text-align: center" #num_residentes="ngModel" name="num_residentes" [(ngModel)]="residencia.num_residentes" required>
+                        <small class="form-text text-muted" *ngIf="num_residentes.touched && !num_residentes.valid">Campo requerido</small>
+                    </div>
+                    <div class="form-group" style="margin-left: 20px">
+                        <label for="">Periodo:</label>
+                        <select class="form-control" style="text-align: center" #periodo="ngModel" name="periodo" [(ngModel)]="residencia.periodo" >
+                          <option *ngFor="let p of periodos" value="{{ p.idPeriodo }}">{{ p.nombre_periodo }}</option>
+                        </select>
+                    </div> 
+              </div>
+
+              <div class="row" style="justify-content: center">
+                  <div class="col">
+                    <div class="form-group" >
+                      <label for="">Carátula:</label>
+                      <input type="file" class="form-control"  name="caratula" id="caratula" (change)="changeImg($event)" accept="imagen/*">
+                    </div>
+                  </div>  
+                  <div class="col">
+                    <div class="form-group" >
+                      <label for="">Archivo PDF:</label>
+                      <input type="file" class="form-control"  name="archivo" id="archivo" (change)="changePdf($event)" accept="pdf/*">
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row" style="justify-content: center"> 
+                <div class="form-group" style="margin-left: 20px">
+                  <label for="">Dependencia:</label>
+                  <select class="form-control" style="text-align: center" #dependencia="ngModel" name="dependencia" [(ngModel)]="residencia.dependencia" >
+                    <option *ngFor="let d of dependencias" value="{{ d.rfc_dependencia }}">{{ d.nombre_dependencia }}</option>
+                  </select>
+                </div>
+                
+              </div>
+            </div>
+        
+          <div class="modal-footer" style="justify-content: center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #000; color: #fff; font-weight: bold; font-size: 15px">Cerrar</button>
+            <button type="button" (click)="gestion()" class="btn" style="background-color: #1E90FF; color: #fff; font-weight: bold; font-size: 15px" [disabled]="!formResidencia.form.valid">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+<!--FIN MODAL RESIDENCIA--> 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="nav-menu fixed-top">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <nav class="navbar" style="margin-bottom:-8%">
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-educacion.jpg" style="width:20%;  margin-left: 118%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-itsal.png" style="width:20%; margin-left: 72%; margin-top: 1%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo_tecnm_2019.jpg" style="width:10%; margin-top: -9%; margin-left: 100%" class="img-fluid" alt="logo"></a> 
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                  <div class="navigation">
+                    <input type="checkbox" name="">
+                    <span></span>
+                    <span></span>
+                    <ul class="menu">
+                        <li><a href="alumno">Alumnos</a>  
+                        <li><a href="asesorgeneral">Asesores</a>  
+                        <li><a href="carrera">Carreras</a>
+                        <li><a href="periodo">Periodos</a>
+                        <li><a href="residencia">Residencias</a>
+                        <li><a href="#home">Salir</a>
+                    </ul>
+                </div>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+
+<h2 *ngIf="dependencias.length == 0">Sin resultados</h2>
+<div *ngIf="dependencias.length > 0">
+  <h3 style="text-align: center; color: black">Proyectos de Residencia</h3>
+  <button type="submit" class="btn btn-light" *ngIf="s.tipo == 1" data-toggle="modal" data-target="#exampleModal" (click)="setG(0)" style="margin-left: 42.5%; color: black">
+    NUEVA RESIDENCIA
+  </button>
+  <br /><br>
+  <table class="table table-striped" style="text-align: center">
+    <tr>
+      <th>#</th>
+      <th>Título de Proyecto</th>
+      <th>Fecha de Entrega</th>
+      <th>Periodo</th>
+      <th>Carátula</th>
+      <th>Número de Residentes</th>
+      <th>Dependencia</th>
+      <th>Archivo/th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let r of residencias; let i=index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ r.titulo }}</td>
+      <td>{{ r.fecha_de_entrega }}</td>
+      <td>{{ r.periodo.nombre_periodo }}</td>
+      <td>
+        <img src="{{ _host }}upload/{{r.caratula}}" *ngIf="r.caratula.length > 0" width="100">
+      </td>
+      <td>{{ r.num_residentes }}</td>
+      <td>{{ r.dependencia.nombre_dependencia }}</td>
+      <td>
+        <img src="" *ngIf="r.caratula.length > 0" width="100">
+      </td>
+      <td></td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Opciones
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" (click)="setG(1,r)">Editar</a>
+            <a class="dropdown-item" [routerLink]="['/residencia']" (click)="eliminar(r.idResidencia)">Eliminar</a>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>

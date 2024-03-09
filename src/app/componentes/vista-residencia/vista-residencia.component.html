@@ -1,0 +1,35 @@
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<div class="form-row align-items-center">
+  <div class="col-auto">
+      <label class="sr-only" for="buscar">Buscar</label>
+      <input type="text" class="form-control mb-2" id="buscar" placeholder="Buscar" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 20px">
+  </div>
+  <div class="col-auto">
+      <button type="button" class="btn btn-warning mb-2" (click)="mostrar()" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 20px">Buscar</button>
+  </div>
+</div>
+
+<h2 *ngIf="residencias.length == 0">Sin resultados</h2>
+<div *ngIf="residencias.length > 0">
+<br>
+<h3>Lista de Residencias</h3>
+
+<div class="row">
+    <div class="card col-3" style="width: 18rem; margin-top: 5px;padding-top: 18px;" *ngFor="let r of residencias">
+        <img src="{{ _host }}upload/{{ r.caratula }}" width="100%" height="400px;" *ngIf="r.caratula.length > 0" class="card-img-top">
+        <div class="card-body">
+          <div class="row">
+              <h5 class="card-title col">{{ r.titulo }}</h5>
+          </div>
+            <!--<p class="card-text">{{ l.resumen }}</p>-->
+            <p class="card-text"><b>{{ r.dependencia.nombre_dependencia }}</b><br/><b></b></p>
+        </div>
+    </div>
+</div>

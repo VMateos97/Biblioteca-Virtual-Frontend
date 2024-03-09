@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="assets/css/styleHIDDEN.css">
+
+<!-- Nav Menu -->
+
+<div class="nav-menu fixed-top" style="background: linear-gradient(135deg, rgb(255, 255, 255) 54%, rgb(0, 0, 0) 40%)">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <nav class="navbar navbar-dark navbar-expand-lg">
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-educacion.jpg" style="width:160%; margin-right: 15%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo-itsal.png" style="width:200%" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/images/logo_tecnm_2019.jpg" style="width:20%" class="img-fluid" alt="logo"></a> 
+                  <div class="collapse navbar-collapse" id="navbar">
+                      <ul class="navbar-nav ml-auto" >
+                          <li class="nav-item"> <a style="color: #fff" class="nav-link" href="#home">INICIO<span class="sr-only">(current)</span></a> </li>
+                          <li class="nav-item"> <a style="color: #fff" class="nav-link active" href="logingeneral">LOGIN</a> </li>
+                      </ul>
+                  </div>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="box">
+  <form class="formulario" style="background: linear-gradient(90deg, rgb(255, 255, 255) -53%, rgb(0, 110, 255) 0%)">
+      <div class="form-group">
+        <label for="exampleInputEmail1" style="color: #fff">USUARIO</label>
+        <input type="text" class="form-control" id="us" name="us" [(ngModel)]="us" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" style="color: #fff">CONTRASEÑA</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="pass">
+      </div>
+      <button type="submit" class="btn" (click)="enviar()">Acceder</button>
+    </form>
+</div>
+
+<div class="box-up">
+<img style="margin-left: 10%; margin-top: 2%" src="assets/images/administrador4.png" width="75%" alt="">
+</div>
